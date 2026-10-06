@@ -1,0 +1,6 @@
+@FirstAngularAnd.NetProject_HostAddress = http://localhost:5003
+
+GET {{FirstAngularAnd.NetProject_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
