@@ -5,6 +5,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FirstAngularAnd.NetProject.Services
 {
+
+    //Encapsulation: encapsulation means wrapping data and method or business in one unit
+    //or place
+
     public class UserService : IUserService
     {
 
@@ -49,7 +53,7 @@ namespace FirstAngularAnd.NetProject.Services
           return await _context.Users.Select(p=> new UserResponseDto
           {
               Email=p.Email
-          }).ToListAsync();
+          }).AsNoTracking().ToListAsync();
         }
 
         public async Task<UserResponseDto> GetById(int id)
