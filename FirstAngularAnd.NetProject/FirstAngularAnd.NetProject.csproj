@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Frontend_\**" />
+    <Content Remove="Frontend_\**" />
+    <EmbeddedResource Remove="Frontend_\**" />
+    <None Remove="Frontend_\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.16" />
 	  
 	  

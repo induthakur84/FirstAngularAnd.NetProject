@@ -41,13 +41,13 @@ namespace FirstAngularAnd.NetProject.Controllers
 
             return Ok(result);
         }
-        [HttpPut("Update")]
+        [HttpPut("Update/{id}")]
         public async Task<IActionResult> Update(UserUpdateDto userUpdateDto)
         {
             var result = await _userService.Update(userUpdateDto);
             return Ok(result);
         }
-        [HttpDelete("Delete")]
+        [HttpDelete("Delete/{id}")]
         public async Task<IActionResult> Delete(int Id)
         {
             var result= await _userService.Delete(Id);
