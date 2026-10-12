@@ -9,14 +9,13 @@ namespace FirstAngularAnd.NetProject.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserService _userService;
-
         public UserController(IUserService userService)
         {
             _userService = userService;
         }
 
-        [HttpPost("Create")]
 
+        [HttpPost("Create")]
         public async Task<IActionResult> Create(UserCreateDto userCreateDto)
         {
 
@@ -69,14 +68,7 @@ namespace FirstAngularAnd.NetProject.Controllers
                     message = "Name and Email are required"
                 });
             }
-
-
-
-
-
             var result = await _userService.Update(userUpdateDto);
-
-
             if (result == null)
             {
                 return NotFound
@@ -86,9 +78,9 @@ namespace FirstAngularAnd.NetProject.Controllers
                     });
 
             }
-
             return Ok(result);
         }
+
         [HttpDelete("Delete/{id}")]
         public async Task<IActionResult> Delete(int Id)
         {
