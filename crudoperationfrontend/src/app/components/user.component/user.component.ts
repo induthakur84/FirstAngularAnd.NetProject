@@ -265,28 +265,54 @@ export class UserComponent {
 
 
   SaveUser(): void {
+
+
+    // trim() removes whitespace
     if (!this.name.trim() || !this.email.trim()) {
+
+      //validation message 
       this.showMessage("please enter both Name and Email", true)
+
+      // stops themethod so that no api request is send
       return;
     }
+
+    // if a user have been selected for editing , update the user
     if (this.isEditMode) {
       const updatedUser: User = {
         id: this.userId,
         name: this.name,
         email: this.email
       };
+
+      //calls the update method from userservice
       this.userService.updateUser(updatedUser.id, updatedUser).subscribe(
         {
+
+          //Executes when the update request succeeds
           next: () => {
+
+            // display the fom and exits edit mode
             this.showMessage('User updated Successfully', false);
+
+
+            // retrived the latest user list from the backend.
             this.getUsers();
+
+            this.resetForm();
           },
+
+          // if executes when the update request fails
           error: (err) => {
-            console.error('Error fetching users:', err);
+
+            
+            // console.error('Error fetching users:', err);
 
             // display an error messge in the application
             // truely indicates that this is an error message.
+                     
 
+            //this display a error message
             this.showMessage(
               'Could not load user. Make sure backend is running ', true
             )
@@ -310,6 +336,10 @@ export class UserComponent {
           next: () => {
             this.showMessage('User created Successfully', false);
             this.getUsers();
+           
+
+            //here we can clears the form after successfull createion
+            this.resetForm();
           },
           error: (err) => {
             console.error('Create error:', err);
@@ -325,6 +355,157 @@ export class UserComponent {
       )
     }
   }
+
+  // Edit Operation : Fill the fom
+
+  // we need to receive the selected user from the html ui table
+
+
+  //flowchart
+
+  //1. user click on edit  button on html table
+  //2. edit(user is call)
+  //3.copy user.id int userid
+  //3. copy user.email into email
+  //4. here we can set iseditmode=true
+  //5. clear the old message
+  //6. angular update form using ngmodel
+  //7 user chagne name or email
+  //8 then click on save and iseditmode true then update the existing
+
+
+
+  editUser(user:User):void{
+
+    
+    //copies the selected user's id into the component properly
+    // this id is used to when we updating the user
+    this.userId=user.id;
+
+
+
+    //Copies the selected user's name into the form property.
+
+    //[(ngModel)] automatically display the value in the input
+
+    this.name=user.name;
+
+    // copies the selecte user's emauk into the form properly
+
+
+    this.email=user.email;
+
+
+    //here we can switch the form create mode to edit mode
+
+    //the html heading and button text text automatically
+    this.isEditMode=true;
+
+
+    // then we can clear if have old or error message.
+
+    this. message="";
+
+  }
+
+
+
+
+  // Delete operation :Delete user by id
+
+  // 1. user click delete
+  //
+  
+
+
+  deleteUser(id:number):void{
+
+
+
+    const confirmDelete= confirm('Are you sure you want to delete this User');
+
+
+    // if the user select cancels , stop without sending the api request
+    if(!confirmDelete){
+     return;
+    }
+    
+
+    //Calls the delete method in UserService
+
+    this.userService.deleteUser(id).subscribe({
+
+
+      next:()=>{
+          //Display a success message
+          this.showMessage('User deleted Successfully', false);
+
+          this.getUsers();
+      },
+
+     error: (err) => {
+
+            
+            // console.error('Error fetching users:', err);
+
+            // display an error messge in the application
+            // truely indicates that this is an error message.
+                     
+
+            //this display a error message
+            this.showMessage(
+              'USer not deleted succesfuly',true);
+            
+          }
+
+    })
+
+    
+  }
+
+
+
+  //flowchare
+  //when reset form is call the set userid=0
+  // clear name and clear email and set iseditmode=false
+  // angular update the form up through ng mode
+  // form returns to add usermode
+
+  resetForm(): void{
+
+
+    //Resets the selected userID
+
+    this.userId=0;
+
+
+    // clears the name input because it is connected using ngmode
+    this.name='';
+
+
+    // clear the emcail input becuase its also connected using ngmodel
+
+    this.email='';
+
+    this.isEditMode=false;
+
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

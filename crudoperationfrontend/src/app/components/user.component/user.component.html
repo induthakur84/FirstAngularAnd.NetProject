@@ -1,1 +1,77 @@
-<p>user.component wzxczxczvklklklklfskldssssssssssssssssssssssssxorks!</p>
+<div class="container">
+
+
+    <!-- Page Header 
+   that display the title of our angular and .net crud operation -->
+
+
+    <header class="header">
+        <h2> Angular &amp; .Net CRUD OPERATION</h2>
+    </header>
+
+    @if (message) {
+
+    <div [class]="isErrorMessage ? 'alert alert-error':'alert alert-success'">
+
+        <!-- angular automatically replaces {{message}} with the actual message that
+        is stored out user.component.ts file
+
+        //Examples
+        messgae='User Created Succesuoly'
+        then brower will display this mesage
+        -->
+        {{message}}
+    </div>
+    }
+    <!-- 
+    after this we can create user form for create and update
+
+    so here we can make same form is used for adding a new user and editing an exisitng user -->
+
+
+    <div class="card form-card">
+
+        <h3> {{isEditMode ? 'Edit User':'Add New User'}}
+
+            <!-- for a form submission
+
+            (ngSubmit) is an angular event binding
+             here when user submits the form saveUser() is called 
+             ts clas method decides whether you are adding or updating a user
+             -->
+
+
+
+            <form (ngSubmit)="SaveUser()">
+
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label for="name">Name</label>
+
+
+                        <input type="text" id="name" name="name" [(ngModel)]="name" placeholder="Enter full name" required/>
+                        <input type="email" id="email" name="email" [(ngModel)]="email" placeholder="Enter Email Address"  required />
+                         
+
+                    </div>
+
+
+                </div>
+
+
+
+            </form>
+
+        </h3>
+
+
+    </div>
+
+
+
+
+
+</div>
