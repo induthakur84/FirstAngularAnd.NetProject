@@ -31,7 +31,9 @@
 
     <div class="card form-card">
 
-        <h3> {{isEditMode ? 'Edit User':'Add New User'}}
+
+        <h3> {{isEditMode ? 'Edit User':'Add New User'}} </h3>
+
 
             <!-- for a form submission
 
@@ -53,23 +55,184 @@
 
 
                         <input type="text" id="name" name="name" [(ngModel)]="name" placeholder="Enter full name" required/>
+
+<!-- 
+                        Display the label for the email input. -->
+
+                        <label for ="email">Email</label>
+
+                        <!-- here we can enable the basic browser validation for email format
+
+                        [(ngModel)]="email"
+
+                        here synchronizes the input value with the email property in the typescript component.
+
+                        required :
+                        marks as the email field as mandatory here -->
                         <input type="email" id="email" name="email" [(ngModel)]="email" placeholder="Enter Email Address"  required />
                          
 
                     </div>
 
 
+
+<!-- 
+                    /Action buttons 
+
+                    here contains the add, update and cancel buttons
+
+                         // for add/update button
+
+                         type="submit"
+
+                         submit the form and it triggers (ngsubmit)
+                      
+
+                         we can use here the ternary operator changes the button test
+
+                         if IsEditmode is true then display updateuser
+                         if iseditmorde is flase , display add user
+
+
+                         both method add and update calls the same method saveUser() method -->
+
+                         <button type="submit" class="btn btn-primary">
+                            {{isEditMode ? 'Update User' : 'Add User'}}
+                         </button>
+                        
+
+                         <!-- //Conditional Cancel Button 
+
+                         if EditMode is true, then show the cancel button.
+                         if edit mode is false , hide the cancel button.
+
+                         this button mainly needed while editing a user -->
+
+
+                         @if(isEditMode){
+
+                            <button type="button" class="btn btn-secondary" (click)="resetForm()"> </button>
+                         }
+
                 </div>
 
 
 
             </form>
-
-        </h3>
+       
 
 
     </div>
 
+
+
+       <!-- to show the user list(user opration)
+        this is the main div where contains the complete user list secction -->
+
+
+          <div class="card table-card">
+
+            <div class="table-header">
+
+<!-- 
+                //display the heading of the user table -->
+
+                <h3> User List</h3>
+            
+                <!-- //one Refresh buton -->
+                <button type="button" class="btn btn-refresh" (click)="getUsers()">
+                    Refresh
+                </button>
+
+
+            </div>
+
+
+             <!-- user table
+
+             this table display the user records in rows and columns -->
+             <table class="user-table">
+             <thead>
+               <tr>
+                        <th>
+                            Name
+                        </th>
+
+                        <th>
+                            Email
+
+                        </th>
+
+                        <th>Actions</th>
+                     </tr>
+             </thead>
+             <tbody>
+
+
+                <!-- users():
+
+                it reads the curretn value of the user signal
+                that we are defined in the typescript component
+
+                user:
+                this represent one user object each iteration
+                
+
+                Track user.id;
+                it helps angular identify each user by its unique id.
+                this helps angular update the correct row efficient;y -->
+                
+        
+
+              @for(user of users(); track user.id)
+              {
+               
+
+                <!-- Create one table row for the current user -->
+
+
+
+
+                <tr>
+n             <!-- 
+                    Interpolation
+                    {{ }} is call interpolation
+                       it display data from the current user object
+
+                       user.id it display the user's id
+                       user.name it display the user's name.
+                       user.email display the user's email
+                    "
+                    -->
+
+                    <td>
+                        {{user.id}}
+                        {{user.name}}
+                        {{user.email}}
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-edit" (click)="editUser(user)">Edit</button>
+                        <button type="button" class="btn btn-delete" (click)="deleteUser(user.id)"></button>
+                    </td>
+
+                </tr>
+              } @empty {
+                <tr>
+                    <td colspan="4" class="no-data">
+                        No Users found in database
+
+                    </td>
+                </tr>
+              }
+
+             </tbody>
+                    
+           
+
+             </table>
+
+
+          </div>
 
 
 
