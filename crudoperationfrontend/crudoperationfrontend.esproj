@@ -4,5 +4,6 @@
     <JavaScriptTestFramework>Jasmine</JavaScriptTestFramework>
     <ShouldRunBuildScript>false</ShouldRunBuildScript>
     <PublishAssetsDirectory>$(MSBuildProjectDirectory)\dist\crudoperationfrontend\</PublishAssetsDirectory>
+    <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
   </PropertyGroup>
 </Project>

@@ -31,6 +31,8 @@ namespace FirstAngularAnd.NetProject.Services
 
             return new UserResponseDto
             {
+                Id=user.Id,
+                Name=user.Name,
                 Email = user.Email,
             };
         }
@@ -52,7 +54,9 @@ namespace FirstAngularAnd.NetProject.Services
         {
           return await _context.Users.Select(p=> new UserResponseDto
           {
-              Email=p.Email
+              Id = p.Id,
+              Name = p.Name,
+              Email = p.Email,
           }).AsNoTracking().ToListAsync();
         }
 
@@ -66,6 +70,9 @@ namespace FirstAngularAnd.NetProject.Services
             }
             return new UserResponseDto
             {
+
+                Id = user.Id,
+                Name = user.Name,
                 Email = user.Email,
             };
         }
@@ -84,6 +91,9 @@ namespace FirstAngularAnd.NetProject.Services
 
             return new UserResponseDto
             {
+
+                Id = user.Id,
+                Name = user.Name,
                 Email = user.Email,
             };
 

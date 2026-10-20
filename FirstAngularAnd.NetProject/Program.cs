@@ -1,7 +1,6 @@
 using FirstAngularAnd.NetProject;
 using FirstAngularAnd.NetProject.Services;
 using FirstAngularAnd.NetProject.Services.IServices;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<ApplicationDbContext>(options=>
 options.UseSqlServer(builder.Configuration.GetConnectionString("DbContext")));
+
 builder.Services.AddScoped<IUserService, UserService>();
 
 

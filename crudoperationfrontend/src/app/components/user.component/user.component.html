@@ -111,7 +111,7 @@
 
                          @if(isEditMode){
 
-                            <button type="button" class="btn btn-secondary" (click)="resetForm()"> </button>
+                            <button type="button" class="btn btn-secondary" (click)="resetForm()">Cancel</button>
                          }
 
                 </div>
@@ -155,6 +155,10 @@
              <thead>
                <tr>
                         <th>
+                            Id
+                        </th>
+
+                        <th>
                             Name
                         </th>
 
@@ -194,7 +198,7 @@
 
 
                 <tr>
-n             <!-- 
+                    <!-- 
                     Interpolation
                     {{ }} is call interpolation
                        it display data from the current user object
@@ -207,12 +211,16 @@ n             <!--
 
                     <td>
                         {{user.id}}
+                    </td>
+                    <td>
                         {{user.name}}
+                    </td>
+                    <td>
                         {{user.email}}
                     </td>
                     <td>
                         <button type="button" class="btn btn-edit" (click)="editUser(user)">Edit</button>
-                        <button type="button" class="btn btn-delete" (click)="deleteUser(user.id)"></button>
+                        <button type="button" class="btn btn-delete" (click)="deleteUser(user.id)">Delete</button>
                     </td>
 
                 </tr>
